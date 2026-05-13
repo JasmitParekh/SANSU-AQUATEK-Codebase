@@ -1,3 +1,7 @@
+// This script is called upon by the bots created in Google AppSheet application.
+// Whenever someone add/updates the any image/docs through the application, this script convert the default FILE_PATH written by the AppSheet into Thumbnail URLs
+// Thumbnail URLs are like this: https://drive.google.com/thumbnail?sz=w1000&id=ID_OF_IMAGE
+
 function authorizeScript() {
   Logger.log("Authorization successful. AppSheet can now call this script.");
   SpreadsheetApp.openById(WEBHOOK_CONFIG.SPREADSHEET_ID);
