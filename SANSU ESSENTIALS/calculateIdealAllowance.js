@@ -1,3 +1,5 @@
+// This is the script which is called upon by Calculate.js in each attendance salary sheet.
+// This script is deployed as library project, and these library is imported by Google App Script of those sheets as "Allowances".
 const CONFIG = {
   HEADERS: {
     HRA: 'Ideal HRA',
