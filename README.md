@@ -11,7 +11,6 @@ This repository hosts custom Google Apps Script modules and AppSheet formula doc
 Source code for backend automations and triggers.
 * **Compliance System:** Automated generation of labor registers (Form-A, Form-13, Form-15). 
   * *Note:* Date logic parameters use `0` for the previous month and `1` for the current month.
-* **Email Migration:** Utilities handling the transition from Zoho to Google Workspace.
 
 ### 2. AppSheet Logic
 Documentation of complex relational logic, tracked here since AppSheet lacks native version control.
