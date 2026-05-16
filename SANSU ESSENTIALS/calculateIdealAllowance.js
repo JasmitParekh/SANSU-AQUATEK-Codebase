@@ -150,7 +150,7 @@ function calculateAllowancesStepwise(ss, sheet, ui) {
 
   // Define allowance priority order with caps
   const allowanceOrder = [
-    { header: CONFIG.HEADERS.HRA, capPercent: 0.4 },
+    { header: CONFIG.HEADERS.HRA, capPercent: 0.5 },
     { header: CONFIG.HEADERS.CONVEYANCE, capPercent: 0.2 },
     { header: CONFIG.HEADERS.MEDICAL, capPercent: 0.1 },
     { header: CONFIG.HEADERS.TRANSPORTATION, capPercent: 0.1 },
