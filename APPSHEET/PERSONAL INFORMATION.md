@@ -240,7 +240,7 @@ ANY(
 
 ---
 
-### 9.5 STATUS \ DESIGNATION (Virtual)
+### 9.5 STATUS | DESIGNATION (Virtual)
 
 Concats STATUS and DESIGNATION from most recent EMPLOYMENT DETAILS row:
 
