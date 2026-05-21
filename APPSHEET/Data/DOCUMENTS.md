@@ -53,13 +53,13 @@
 
 | Column | Show? | Type | Req? | Key? | Edit? | Label? | Search? | PII? | Image Folder Path |
 |--------|-------|------|------|------|-------|--------|---------|------|-------------------|
-| `I-CARD` | ❌ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/I-Cards` |
-| `AADHAR CARD` | ❌ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/AadharCard` |
-| `PAN CARD` | ❌ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/PANCard` |
-| `POLICE VARIFICATION` | ❌ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/Police Varification` |
-| `BANK PASSBOOK` | ❌ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/Bank Passbook` |
-| `VOTING CARD` | ❌ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/Voting Card` |
-| `MEDICAL REPORT` | ❌ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/Medical Report` |
+| `I-CARD` | ✅ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/I-Cards` |
+| `AADHAR CARD` | ✅ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/AadharCard` |
+| `PAN CARD` | ✅ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/PANCard` |
+| `POLICE VARIFICATION` | ✅ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/Police Varification` |
+| `BANK PASSBOOK` | ✅ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/Bank Passbook` |
+| `VOTING CARD` | ✅ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/Voting Card` |
+| `MEDICAL REPORT` | ✅ | Image | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ | `Pictures/Medical Report` |
 
 ---
 
