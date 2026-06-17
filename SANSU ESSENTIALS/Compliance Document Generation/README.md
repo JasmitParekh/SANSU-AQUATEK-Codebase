@@ -15,6 +15,7 @@ Google Apps Script (GAS) project containing the core logic to generate and updat
 * `ESIC-PF.js`: Employee State Insurance and Provident Fund calculations.
 * `bonus.js`: Bonus computation logic.
 * `form-18.js`: Form-18 generation.
+* `mailMerge.js`: Used as a replacement for Autocrat.
 
 ## Usage Notes
 * When calling functions from site-specific scripts, prefix with the library identifier (e.g., `Documents.functionName()`).
