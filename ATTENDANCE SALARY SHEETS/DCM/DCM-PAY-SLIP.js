@@ -10,21 +10,21 @@ function generatePaymentRecieptsForDCM() {
 
   const config = {
     // ── Source ──────────────────────────────────────────────────────────────
-    sourceSheetId:  '1Cv47Nq82FG2I3jExFqBZkRUvMHCGnTQbHaX8uhfUjV8', // DCM Attendance Salary Sheet
-    sourceTabName:  null,                // null = first sheet
+    sourceSheetId: SITE_CONFIG.attendanceSalarySheetID,
+    sourceTabName: SITE_CONFIG.departmentName,
 
     // ── Template ────────────────────────────────────────────────────────────
-    templateId:     '1CVTscAjehmuEaBxJVBledN2l6reqMlKrKMBUmxyzhwY',          // Google Docs template
+    templateId: SITE_CONFIG.paySlipTemplateID,
 
     // ── Output ──────────────────────────────────────────────────────────────
-    outputMode:     'COMBINED',         // 'ONE_PER_ROW' | 'COMBINED',
-    outputFileName: 'Payment Slips', // <<tags>> in filename
+    outputMode: 'COMBINED',                                                   // 'ONE_PER_ROW' | 'COMBINED',
+    outputFileName: 'Payment Slips',                                          // <<tags>> in filename
 
-    siteFolderName: 'DCM',  // uses standard month-folder hierarchy
-    dates:          0,                    // 0 = previous month
+    siteFolderName: SITE_CONFIG.siteFolderName,
+    dates: SITE_CONFIG.dates,
 
     // ── Filtering ───────────────────────────────────────────────────────────
-    rowFilter:      null,                 // null = all rows
+    rowFilter: null,                                                          // null = all rows
 
     // ── Tag Resolution ───────────────────────────────────────────────────
      tagMap: {
