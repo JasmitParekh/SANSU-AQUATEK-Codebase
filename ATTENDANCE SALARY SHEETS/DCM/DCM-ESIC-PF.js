@@ -5,13 +5,13 @@ function generateESICPFForDCM() {
   const startTime = Date.now();
 
   const config = {
-    templateId: '1k1Gxh7EgmYT4QMImFC2wbEAXo2o0Nn3gdMPiNxhLEz4',
-    targetFolderId: '12MXsKMMfaZ32YGa093WSNvf3JdgiLIzD',
+    templateId: SITE_CONFIG.esic_pfTemplateID,
+    targetFolderId: SITE_CONFIG.esic_pftargetFolderID,
 
-    attendanceSlipId: '1Cv47Nq82FG2I3jExFqBZkRUvMHCGnTQbHaX8uhfUjV8',
-    siteFolderName: 'DCM',
+    attendanceSlipId: SITE_CONFIG.attendanceSalarySheetID,
+    siteFolderName: SITE_CONFIG.siteFolderName,
 
-    dates: 0, // Date control: 0 = previous month, 1 = current month
+    dates: SITE_CONFIG.dates,
 
     formConfig: {
       columns: [
