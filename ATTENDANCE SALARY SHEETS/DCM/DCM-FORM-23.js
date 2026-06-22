@@ -1,14 +1,25 @@
-function generateForm23() {
+function generateForm23WithDepartmentsDCM(){
   const ui = SpreadsheetApp.getUi();
   const response = ui.alert('FORM-23', 'WOULD YOU LIKE TO GENERATE FORM-23?', ui.ButtonSet.OK_CANCEL);
-  if (response !== ui.Button.OK) return; // Immediately exit if they click Cancel or the 'X'
+  if (response !== ui.Button.OK) return;
   const startTime = Date.now();
 
-  const config = {
-    formatSpreadsheetId: '10FtLuNLa37c2a8PhOxeiKoaGkJbBccXPZDDFSDkUy_s',
-    attendanceSlipId: '1Cv47Nq82FG2I3jExFqBZkRUvMHCGnTQbHaX8uhfUjV8',
-    siteFolderName: 'DCM',
-    dates: 0,
+  const departments = SITE_CONFIG.departments_salary || [null];       // This should match with the DEPARTMENT NAME column in EMPLOYEE DETAILS SHEET.
+
+  departments.forEach(department => {
+      generateForm23(department?.name ?? department);
+  })
+
+  const timeTaken = ((Date.now() - startTime) / 1000).toFixed(2);
+  ui.alert('EXECUTION COMPLETE', `CODE EXECUTION IS COMPLETED.\nTIME TAKEN: ${timeTaken} SECONDS.`, ui.ButtonSet.OK);
+}
+
+function generateForm23(departmentName) {
+  const baseConfig = {
+    formatSpreadsheetId: SITE_CONFIG.formatTemplateID,
+    attendanceSlipId: SITE_CONFIG.attendanceSalarySheetID,
+    siteFolderName: SITE_CONFIG.siteFolderName,
+    dates: SITE_CONFIG.dates,
 
     // Define which forms to generate
     forms: [
@@ -48,9 +59,15 @@ function generateForm23() {
     }
   };
 
-  // Call the library function
-  Documents.generateAttForms(config);
+  const categories = SITE_CONFIG.categories_salary || [null];                     // Provide the categories for which the forms are to be generated.
+  categories.forEach(category => {                                                // This should match with the category column in Attendance_Salary_Sheet.
+    generateForm23WithCategoryFilterDCM(baseConfig, category);
+  })
+}
 
-  const timeTaken = ((Date.now() - startTime) / 1000).toFixed(2);
-  ui.alert('EXECUTION COMPLETE', `CODE EXECUTION IS COMPLETED.\nTIME TAKEN: ${timeTaken} SECONDS.`, ui.ButtonSet.OK);
+function generateForm23WithCategoryFilterDCM(baseConfig, category){
+    const config = JSON.parse(JSON.stringify(baseConfig));
+    config.subFolder = category;
+    config.categoryFilter = category;
+    Documents.generateAttForms(config);                                             // Call the Documents library
 }
