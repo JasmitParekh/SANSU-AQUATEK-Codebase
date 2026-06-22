@@ -1,23 +1,34 @@
-function generateFormsFromAttendanceSlip() {
+function generateWithDepartmentsDCM(){
   const ui = SpreadsheetApp.getUi();
   const response = ui.alert('FORM-B,C,D,17,20 TO 22', 'WOULD YOU LIKE TO GENERATE FORM-B,C,D,17,20 TO 22?', ui.ButtonSet.OK_CANCEL);
-  if (response !== ui.Button.OK) return; // Immediately exit if they click Cancel or the 'X'
+  if (response !== ui.Button.OK) return;
   const startTime = Date.now();
 
-  const config = {
-    formatSpreadsheetId: '10FtLuNLa37c2a8PhOxeiKoaGkJbBccXPZDDFSDkUy_s',
-    attendanceSlipId: '1Cv47Nq82FG2I3jExFqBZkRUvMHCGnTQbHaX8uhfUjV8',
-    siteFolderName: 'DCM',
-    dates: 0,
+  const departments = SITE_CONFIG.departments_salary || [null];                   // This should match with the DEPARTMENT NAME column in EMPLOYEE DETAILS SHEET.
+
+  departments.forEach(department => {
+      generateFormsFromAttendanceSlip(department?.name ?? department);
+  })
+
+  const timeTaken = ((Date.now() - startTime) / 1000).toFixed(2);
+  ui.alert('EXECUTION COMPLETE', `CODE EXECUTION IS COMPLETED.\nTIME TAKEN: ${timeTaken} SECONDS.`, ui.ButtonSet.OK);
+}
+
+function generateFormsFromAttendanceSlip(departmentName) {
+  const baseConfig = {
+    formatSpreadsheetId: SITE_CONFIG.formatTemplateID,
+    attendanceSlipId: SITE_CONFIG.attendanceSalarySheetID,
+    siteFolderName: SITE_CONFIG.siteFolderName,
+    dates: SITE_CONFIG.dates,
 
     forms: [
-      { sheetName: 'Form-B_Format', fileName: '2. Form-B: Wage Register', configKey: 'formB' },
-      { sheetName: 'Form-C_Format', fileName: '3. Form-C: Register of Loan/Recoveries', configKey: 'formC' },
-      { sheetName: 'Form-D_Format', fileName: '4. Form-D: Attendance Register', configKey: 'formD' },
-      { sheetName: 'Form-17_Format', fileName: '5. Form-17: Wage Register', configKey: 'form17' },
-      { sheetName: 'Form-20_Format', fileName: '6. Form-20: Register of Damage and Loss', configKey: 'form20' },
-      { sheetName: 'Form-21_Format', fileName: '7. Form-21: Register of Fines', configKey: 'form21' },
-      { sheetName: 'Form-22_Format', fileName: '8. Form-22: Advance Register', configKey: 'form22' }
+      { sheetName: 'Form-B_Format', fileName: `2. Form-B: Wage Register${departmentName ? ` (${departmentName})` : ''}`, configKey: 'formB' },
+      { sheetName: 'Form-C_Format', fileName: `3. Form-C: Register of Loan/Recoveries${departmentName ? ` (${departmentName})` : ''}`, configKey: 'formC' },
+      { sheetName: 'Form-D_Format', fileName: `4. Form-D: Attendance Register${departmentName ? ` (${departmentName})` : ''}`, configKey: 'formD' },
+      { sheetName: 'Form-17_Format', fileName: `5. Form-17: Wage Register${departmentName ? ` (${departmentName})` : ''}`, configKey: 'form17' },
+      { sheetName: 'Form-20_Format', fileName: `6. Form-20: Register of Damage and Loss${departmentName ? ` (${departmentName})` : ''}`, configKey: 'form20' },
+      { sheetName: 'Form-21_Format', fileName: `7. Form-21: Register of Fines${departmentName ? ` (${departmentName})` : ''}`, configKey: 'form21' },
+      { sheetName: 'Form-22_Format', fileName: `8. Form-22: Advance Register${departmentName ? ` (${departmentName})` : ''}`, configKey: 'form22' }
     ],
     
     formConfigs: {
@@ -206,11 +217,12 @@ function generateFormsFromAttendanceSlip() {
             header: 'Others (PT)',
             formula: '=IF({Total}>12000, 200, 0)'
           },
+          'FINE',
           'Advance',
           {
             type: 'formula',
             header: 'Net Payment',
-            formula: '={Total}-{Others (PT)}-{PF}-{Advance}'
+            formula: '={Total}-{Others (PT)}-{PF}-{FINE}-{Advance}'
           },
           { type: 'empty' },
           { type: 'empty' }
@@ -221,12 +233,18 @@ function generateFormsFromAttendanceSlip() {
       form20: {},
       form21: {},
       form22: {}
-    }
+    },
   };
 
-  // Call the library function
-  Documents.generateAttForms(config);
+  const categories = SITE_CONFIG.categories_salary || [null];                     // Provide the categories for which the forms are to be generated.
+  categories.forEach(category => {                                                // This should match with the category column in Attendance_Salary_Sheet.
+    generateWithCategoryFilterDCM(baseConfig, category);
+  })
+}
 
-  const timeTaken = ((Date.now() - startTime) / 1000).toFixed(2);
-  ui.alert('EXECUTION COMPLETE', `CODE EXECUTION IS COMPLETED.\nTIME TAKEN: ${timeTaken} SECONDS.`, ui.ButtonSet.OK);
+function generateWithCategoryFilterDCM(baseConfig, category){
+    const config = JSON.parse(JSON.stringify(baseConfig));
+    config.subFolder = category;
+    config.categoryFilter = category;
+    Documents.generateAttForms(config);                                             // Call the Documents library
 }
