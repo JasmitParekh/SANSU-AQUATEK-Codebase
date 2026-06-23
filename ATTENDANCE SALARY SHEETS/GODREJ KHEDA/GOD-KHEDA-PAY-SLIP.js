@@ -1,27 +1,34 @@
-function generatePaymentRecieptsForGodrejKheda() {
-  const ui       = SpreadsheetApp.getUi();
-  const response = ui.alert(
-    'PAYMENT SLIPS',
-    'WOULD YOU LIKE TO GENERATE PAYMENT SLIP FOR GODREJ KHEDA?',
-    ui.ButtonSet.OK_CANCEL
-  );
+function generatePaySlipWithDepartmentsForGodrejKheda(){
+  const ui = SpreadsheetApp.getUi();
+  const response = ui.alert('PAYMENT SLIPS', 'WOULD YOU LIKE TO GENERATE PAYMENT SLIPS FOR DCM?', ui.ButtonSet.OK_CANCEL);
   if (response !== ui.Button.OK) return;
   const startTime = Date.now();
 
-  const config = {
+  const departments = SITE_CONFIG.departments_payment || [null]; // This should match with the DEPARTMENT NAME column in EMPLOYEE DETAILS SHEET.
+  
+  departments.forEach(department => {
+    generatePaymentRecieptsForGodrejKheda(department)
+  })
+
+  const timeTaken = ((Date.now() - startTime) / 1000).toFixed(2);
+  ui.alert('EXECUTION COMPLETE', `CODE EXECUTION IS COMPLETED.\nTIME TAKEN: ${timeTaken} SECONDS.`, ui.ButtonSet.OK);
+}
+
+function generatePaymentRecieptsForGodrejKheda(departmentName) {
+  const baseConfig = {
     // ── Source ──────────────────────────────────────────────────────────────
-    sourceSheetId:  '1dNQZq398LFy76kzpWN4733zdtns9LjJoBgtq6Mt-FMU', // GODREJ KHEDA Attendance Salary Sheet
-    sourceTabName:  null,                // null = first sheet
+    sourceSheetId:  SITE_CONFIG.attendanceSalarySheetID, // GODREJ KHEDA Attendance Salary Sheet
+    sourceTabName:  departmentName,                      // null = first sheet
 
     // ── Template ────────────────────────────────────────────────────────────
-    templateId:     '1cVmWs3UrpTrKc-VsbJisMzibqQX95IS6TxJ_oT9sK9w',          // Google Docs template
+    templateId:     SITE_CONFIG.paySlipTemplateID,          // Google Docs template
 
     // ── Output ──────────────────────────────────────────────────────────────
     outputMode:     'COMBINED',         // 'ONE_PER_ROW' | 'COMBINED',
     outputFileName: 'Payment Slips', // <<tags>> in filename
 
-    siteFolderName: 'Godrej Kheda',  // uses standard month-folder hierarchy
-    dates:          0,                    // 0 = previous month
+    siteFolderName: SITE_CONFIG.siteFolderName,  // uses standard month-folder hierarchy
+    dates:          SITE_CONFIG.dates,                    // 0 = previous month
 
     // ── Filtering ───────────────────────────────────────────────────────────
     rowFilter:      null,                 // null = all rows
@@ -30,15 +37,7 @@ function generatePaymentRecieptsForGodrejKheda() {
      tagMap: {
       '<<Month>>': 'Date on which Overtime Worked'
     }
-
   };
 
-  Documents.generateMailMerge(config);
-
-  const timeTaken = ((Date.now() - startTime) / 1000).toFixed(2);
-  ui.alert(
-    'EXECUTION COMPLETE',
-    `CODE EXECUTION IS COMPLETED.\nTIME TAKEN: ${timeTaken} SECONDS.`,
-    ui.ButtonSet.OK
-  );
+  Documents.generateMailMerge(baseConfig);
 }
