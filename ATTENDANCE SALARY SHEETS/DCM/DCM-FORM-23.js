@@ -23,7 +23,7 @@ function generateForm23(departmentName) {
 
     // Define which forms to generate
     forms: [
-      { sheetName: 'Form-23_Format', fileName: '10. Form-23: Register of Overtime', configKey: 'form23' }
+      { sheetName: 'Form-23_Format', fileName: `10. Form-23: Register of Overtime${departmentName ? ` (${departmentName})` : ''}`, configKey: 'form23' }
     ],
     
     formConfigs: {
