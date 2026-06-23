@@ -28,8 +28,7 @@ function generateForm18ForDCM(departmentName) {
     dates: SITE_CONFIG.dates,                                                       
 
     // ── Optional filters ──────────────────────────────────────────────────
-    plantSheetName: departmentName,
-    categoryFilter: SITE_CONFIG.categoryFilter,                                     
+    plantSheetName: departmentName,                                    
 
     // ── Form-18 generation ────────────────────────────────────────────────
     generateForm18:   SITE_CONFIG.generateForm18,
