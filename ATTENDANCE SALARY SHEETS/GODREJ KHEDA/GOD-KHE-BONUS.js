@@ -1,16 +1,16 @@
 function generateBonusForGodrejKheda() {
-    const ui = SpreadsheetApp.getUi();
+  const ui = SpreadsheetApp.getUi();
   const response = ui.alert('BONUS', 'WOULD YOU LIKE TO RUN BONUS SCRIPT?', ui.ButtonSet.OK_CANCEL);
   if (response !== ui.Button.OK) return; // Immediately exit if they click Cancel or the 'X'
   const startTime = Date.now();
 
   const config1 = {
-    templateID: '1WYQNmyx_kYGBggFAWvCkJZmn9jLyremyLAPVo5c_PXQ',
-    targetFolderID: '1H_jz4Ajxd4CFgCSfU0NjLJDvVbGuRktz',
-    attendanceSlipID: '1dNQZq398LFy76kzpWN4733zdtns9LjJoBgtq6Mt-FMU',
+    templateID: SITE_CONFIG.bonusTemplateID,
+    targetFolderID: SITE_CONFIG.bonusTargetFolderID,
+    attendanceSlipID: SITE_CONFIG.attendanceSalarySheetID,
 
-    siteFolderName: 'Godrej Kheda',
-    dates: 0, // Date control: 0 = previous month, 1 = current month
+    siteFolderName: SITE_CONFIG.siteFolderName,
+    dates: SITE_CONFIG.dates, // Date control: 0 = previous month, 1 = current month
 
     formConfig: {
       columns: [
@@ -19,7 +19,7 @@ function generateBonusForGodrejKheda() {
         'Name',
         {
           type: 'empty',
-          value: 'Godrej Kheda'
+          value: SITE_CONFIG.siteFolderName
         },
         'Remarks'
       ]
