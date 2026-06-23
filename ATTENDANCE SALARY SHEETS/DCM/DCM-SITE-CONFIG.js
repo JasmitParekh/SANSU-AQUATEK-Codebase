@@ -13,6 +13,7 @@ const SITE_CONFIG = {
 
   // Form-14 IDs
   form14TemplateID: '1DxGkIk4oa-LIw0fXNGBa1OF4QYMvZBMOVJdDF2hhqBE',              // ID of Form-14 Template
+  departments_form14: null,                                                      // e.g. ['DEPARTMENT1', 'DEPARTMENT2']. Provide Department names for which Form-14 needs to be generated.
 
   // Form-16 to Form-23 IDs
   departments_salary: null,                                                     // e.g. [{ name: 'CPP', sheetName: 'CPP' }, { name: 'B.B. - 3', sheetName: 'B.B. - 3' }]. This should match with the DEPARTMENT NAME column in EMPLOYEE DETAILS SHEET.
@@ -33,4 +34,5 @@ const SITE_CONFIG = {
 
   // Payment Slip IDs
   paySlipTemplateID: '1CVTscAjehmuEaBxJVBledN2l6reqMlKrKMBUmxyzhwY',             // ID of Payment SLip Template
+  departments_payment: null,                                                     // e.g. ['DEPARTMENT1', 'DEPARTMENT2']. Provide Department names for which Form-14 needs to be generated.
 }
