@@ -23,6 +23,9 @@ const SITE_CONFIG = {
   leaveWageSheetID: '1FNY4BbxkeYlZsMHuXWldKNPUEpgXDB2JVz5YEYE7BxM',              // ID of Leave and Wage Sheet
   form18FolderID: '1ow7lawdhh5JOZ_KsFAP6D7Y2XHYR45-6',                           // ID of folder where generated Form-18 shall be stored
   form18TemplateID: '10YdxRJKDuHQK_Z7g5BOzO_hZHlu8-5D3KTRUancrEV8',              // ID of Form-18's template
+  departments_form18: null,                                                      // e.g. ['DEPARTMENT1', 'DEPARTMENT2'].
+  categories_form18: null,                                                       // e.g. ['SKILLED', 'UNSKILLED'].
+  generateForm18: true,                                                          // Write false if you don't want to generate Form-18
 
   // Bonus Sheet IDs DO NOT CHANGE IT
   bonusTemplateID: '1WYQNmyx_kYGBggFAWvCkJZmn9jLyremyLAPVo5c_PXQ',               // ID of Bonus Sheet Template
